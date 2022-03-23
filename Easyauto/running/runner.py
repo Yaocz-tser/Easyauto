@@ -142,7 +142,7 @@ class TestMain(object):
                 whitelist=self.whitelist,
                 verbosity=2)
             runner.run(suits)
-            log.printf("A run the test in debug mode without generating HTML report!")
+            
 
     def open_browser(self):
         """
