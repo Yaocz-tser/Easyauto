@@ -10,31 +10,35 @@ from XTestRunner import HTMLTestRunner
 from XTestRunner import XMLTestRunner
 from selenium.webdriver.remote.webdriver import WebDriver as SeleniumWebDriver
 from Easyauto.driver import Browser
-
-from Easyauto.logging.exceptions import EasyautoException
+from Easyauto.logging import log
+from Easyauto.logging.exceptions import SeldomException
 from Easyauto.running.DebugTestRunner import DebugTestRunner
-from Easyauto.running.config import Easyauto, BrowserConfig
+from Easyauto.running.config import Seldom, BrowserConfig
 from Easyauto.running.loader_extend import EasyautoTestLoader
 
+INIT_FILE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "__init__.py")
+_version_re = re.compile(r'__version__\s+=\s+(.*)')
+with open(INIT_FILE, 'rb') as f:
+    version = str(ast.literal_eval(_version_re.search(
+        f.read().decode('utf-8')).group(1)))
 
-
-str = '''
+Easyauto_str = '''
    ______                             __      
    / ____/___ ________  ______ ___  __/ /_____ 
   / __/ / __ `/ ___/ / / / __ `/ / / / __/ __ \
  / /___/ /_/ (__  ) /_/ / /_/ / /_/ / /_/ /_/ /
-/_____/\__,_/____/\__, /\__,_/\__,_/\__/\____/ 
+/_____/\__,_/____/\__, /\__,_/\__,_/\__/\____/ v{v} 
                  /____/                      
-'''
+'''.format(v=version)
 
 class TestMain(object):
     """
-    Reimplemented Easyauto Runner, Support for Web and API
+    Reimplemented Seldom Runner, Support for Web and API
     """
     TestSuits = []
 
     def __init__(self, path=None, browser=None, base_url=None, debug=False, timeout=10,
-                 report=None, title="Easyauto Test Report", tester="Anonymous", description="Test case execution",
+                 report=None, title="Seldom Test Report", tester="Anonymous", description="Test case execution",
                  rerun=0, save_last_run=False, language="en", whitelist=[], blacklist=[], auto=True):
         """
         runner test case
@@ -55,7 +59,7 @@ class TestMain(object):
         :param auto:
         :return:
         """
-    
+        print(Easyauto_str)
         self.path = path
         self.browser = browser
         self.report = report
@@ -75,9 +79,9 @@ class TestMain(object):
         if isinstance(debug, bool) is False:
             raise TypeError("Debug {} is not Boolean type.".format(debug))
 
-        Easyauto.timeout = timeout
-        Easyauto.debug = debug
-        Easyauto.base_url = base_url
+        Seldom.timeout = timeout
+        Seldom.debug = debug
+        Seldom.base_url = base_url
 
         # ----- Global open browser -----
         self.open_browser()
@@ -149,7 +153,7 @@ class TestMain(object):
                 whitelist=self.whitelist,
                 verbosity=2)
             runner.run(suits)
-            
+            log.printf("A run the test in debug mode without generating HTML report!")
 
     def open_browser(self):
         """
@@ -157,16 +161,16 @@ class TestMain(object):
         """
         if self.browser is not None:
             BrowserConfig.NAME = self.browser
-            Easyauto.driver = Browser(BrowserConfig.NAME)
+            Seldom.driver = Browser(BrowserConfig.NAME)
 
     @staticmethod
     def close_browser():
         """
         How to open the browser, close the browser
         """
-        if isinstance(Easyauto.driver, SeleniumWebDriver):
-            Easyauto.driver.quit()
-            Easyauto.driver = None
+        if isinstance(Seldom.driver, SeleniumWebDriver):
+            Seldom.driver.quit()
+            Seldom.driver = None
 
 
 class TestMainExtend(TestMain):
@@ -177,7 +181,7 @@ class TestMainExtend(TestMain):
     """
 
     def __init__(self, path=None, browser=None, base_url=None, debug=False, timeout=10,
-                 report=None, title="Easyauto Test Report", description="Test case execution",
+                 report=None, title="Seldom Test Report", description="Test case execution",
                  rerun=0, save_last_run=False, whitelist=[], blacklist=[], auto=False):
 
         if path is None:
@@ -192,7 +196,7 @@ class TestMainExtend(TestMain):
     def collect_cases(json=False):
         """
         Return the collected case information.
-        EasyautoTestLoader.collectCaseInfo = True
+        SeldomTestLoader.collectCaseInfo = True
         """
         if json is True:
             return sys_json.dumps(EasyautoTestLoader.collectCaseList)
@@ -213,9 +217,9 @@ class TestMainExtend(TestMain):
             d_class = d.get("class").get("name", None)
             d_method = d.get("method").get("name", None)
             if (d_file is None) or (d_class is None) or (d_method is None):
-                raise EasyautoException(
+                raise SeldomException(
                     """Use case format error, please refer to: 
-                    https://github.com/EasyautoQA/Easyauto/blob/master/docs/platform.md""")
+                    https://github.com/SeldomQA/Easyauto/blob/master/docs/platform.md""")
             if file_name == d_file and class_name == d_class and method_name == d_method:
                 return True
 
@@ -250,7 +254,6 @@ class TestMainExtend(TestMain):
 
 
 main = TestMain
-
 
 if __name__ == '__main__':
     main()

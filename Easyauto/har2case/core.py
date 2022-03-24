@@ -8,20 +8,14 @@ class HarParser(object):
     def __init__(self, har_file_path):
         self.har_file_path = har_file_path
         self.case_template = """import Easyauto
-
-
 class TestRequest(Easyauto.TestCase):
-
     def start(self):
         self.url = "{url}"
-
     def test_case(self):
         headers = {header}
         cookies = {cookie}
         self.{method}(self.url, {params}, headers=headers, cookies=cookies)
         self.assertStatusCode({resp_status})
-
-
 if __name__ == '__main__':
     Easyauto.main()
 """
@@ -109,4 +103,3 @@ if __name__ == '__main__':
 if __name__ == '__main__':
     hp = HarParser("./demo.har")
     hp.gen_testcase()
-

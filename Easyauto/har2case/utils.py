@@ -6,10 +6,8 @@ import logging
 
 def load_har_log_entries(file_path):
     """ load HAR file and return log entries list
-
     Args:
         file_path (str)
-
     Returns:
         list: entries
             [
@@ -22,7 +20,6 @@ def load_har_log_entries(file_path):
                     "response": {}
                 }
             ]
-
     """
     with io.open(file_path, "r+", encoding="utf-8-sig") as f:
         try:
