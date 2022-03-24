@@ -2,9 +2,9 @@ try:
     from faker import Faker
 except ModuleNotFoundError:
     raise ModuleNotFoundError('Please install the library. https://faker.readthedocs.io/en/master/index.html')
-# from Easyauto.running.config import FakerConfig
+from Easyauto.running.config import FakerConfig
 
-fake = Faker('zh_CN')
+fake = Faker(FakerConfig.LANGUAGE)
 
 
 
