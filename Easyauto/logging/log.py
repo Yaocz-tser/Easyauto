@@ -6,7 +6,7 @@ import platform
 import logging.handlers
 from colorama import Fore, Style
 from Easyauto.running.config import BrowserConfig
-from Easyauto.running.config import Seldom
+from Easyauto.running.config import Easyauto
 
 __all__ = [
     "debug", "info", "error", "warn", "printf",
@@ -49,12 +49,12 @@ colorLog = True
 def debug(msg):
     now = time.strftime("%Y-%m-%d %H:%M:%S")
     if colorLog is True:
-        if Seldom.debug is False:
+        if Easyauto.debug is False:
             print(now + " [DEBUG] " + str(msg))
         _logger.debug(now + " [DEBUG] " + str(msg))
     else:
         msg = msg.encode('gbk', 'ignore').decode('gbk', "ignore")
-        if Seldom.debug is False:
+        if Easyauto.debug is False:
             print(now + str(msg))
         _logger.debug(now + " [DEBUG] " + str(msg))
 
@@ -62,12 +62,12 @@ def debug(msg):
 def info(msg):
     now = time.strftime("%Y-%m-%d %H:%M:%S")
     if colorLog is True:
-        if Seldom.debug is False:
+        if Easyauto.debug is False:
             print(now + " [INFO] " + str(msg))
         _logger.info(Fore.GREEN + now + " [INFO] " + str(msg) + Style.RESET_ALL)
     else:
         msg = msg.encode('gbk', 'ignore').decode('gbk', "ignore")
-        if Seldom.debug is False:
+        if Easyauto.debug is False:
             print(now + str(msg))
         _logger.info(now + " [INFO] " + str(msg))
 
@@ -75,12 +75,12 @@ def info(msg):
 def error(msg):
     now = time.strftime("%Y-%m-%d %H:%M:%S")
     if colorLog is True:
-        if Seldom.debug is False:
+        if Easyauto.debug is False:
             print(now + " [ERROR] " + str(msg))
         _logger.error(Fore.RED + now + " [ERROR] " + str(msg) + Style.RESET_ALL)
     else:
         msg = msg.encode('gbk', 'ignore').decode('gbk', "ignore")
-        if Seldom.debug is False:
+        if Easyauto.debug is False:
             print(now + str(msg))
         _logger.info(now + " [ERROR] " + str(msg))
 
@@ -88,12 +88,12 @@ def error(msg):
 def warn(msg):
     now = time.strftime("%Y-%m-%d %H:%M:%S")
     if colorLog is True:
-        if Seldom.debug is True:
+        if Easyauto.debug is True:
             print(now + " [WARNING] " + str(msg))
         _logger.warning(Fore.YELLOW + now + " [WARNING] " + str(msg) + Style.RESET_ALL)
     else:
         msg = msg.encode('gbk', 'ignore').decode('gbk', "ignore")
-        if Seldom.debug is False:
+        if Easyauto.debug is False:
             print(now + str(msg))
         _logger.info(now + " [WARNING] " + str(msg))
 

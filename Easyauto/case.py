@@ -14,6 +14,9 @@ from Easyauto.request import ResponseResult
 from Easyauto.utils import diff_json, AssertInfo
 
 
+
+
+
 class TestCase(unittest.TestCase, WebDriver):
 
     def start_class(self):
@@ -154,7 +157,7 @@ class TestCase(unittest.TestCase, WebDriver):
         if text is None:
             raise AssertionError('The assertion text cannot be empty.')
 
-        alert = wait.until(EC.alert_is_present())
+        alert = wait(Easyauto.driver, timeout=Easyauto.timeout).until(EC.alert_is_present())
         alert_text = alert.text
         self.assertEqual(alert_text, text, msg=msg)
 
