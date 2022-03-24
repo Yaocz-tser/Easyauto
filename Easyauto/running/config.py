@@ -16,3 +16,9 @@ class BrowserConfig:
     REPORT_PATH = None
     REPORT_TITLE = "Easyauto Test Report"
     LOG_PATH = None
+
+class FakerConfig:
+    '''
+       Define Faker language
+    '''
+    LANGUAGE = 'zh_CN'
