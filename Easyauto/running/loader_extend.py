@@ -1,4 +1,4 @@
-"""seldom Loading unittests."""
+"""Easyauto Loading unittests."""
 
 import functools
 from fnmatch import fnmatchcase
