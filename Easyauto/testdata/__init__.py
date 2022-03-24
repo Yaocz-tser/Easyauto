@@ -10,7 +10,7 @@ fake = Faker('zh_CN')
 
 def first_name_female(number=None):
     '''
-        返回一个女性的firstname
+        返回一个随机女性的firstname
     '''
     if not number or number == 1:
         return fake.first_name_female()
@@ -22,7 +22,7 @@ def first_name_female(number=None):
 
 def first_name_male(number=None):
     '''
-        返回一个男性的firstname
+        返回一个随机男性的firstname
     '''
     if not number or number == 1:
         return fake.first_name_male()
@@ -34,7 +34,7 @@ def first_name_male(number=None):
 
 def last_name_female(number=None):
     '''
-        返回一个女性的lastname
+        返回一个随机女性的lastname
     '''
     if not number or number == 1:
         return fake.last_name_female()
@@ -46,7 +46,7 @@ def last_name_female(number=None):
 
 def last_name_male(number=None):
     '''
-        返回一个男性的lastname
+        返回一个随机男性的lastname
     '''
     if not number or number == 1:
         return fake.last_name_male()
@@ -58,7 +58,7 @@ def last_name_male(number=None):
 
 def username(number=None):
     '''
-        返回一个普通的名字
+        返回一个随机普通的名字
     '''
     if not number or number == 1:
         return fake.name()
@@ -70,7 +70,7 @@ def username(number=None):
 
 def address(number=None):
     '''
-        返回一个地址: 
+        返回一个随机地址: 
         ex:澳门特别行政区台北市平山陈街G座 418897
     '''
     if not number or number == 1:
@@ -83,7 +83,7 @@ def address(number=None):
 
 def city(number=None):
     '''
-        返回一个城市名字
+        返回一个随机城市名字
     '''
     if not number or number == 1:
         return fake.city()
@@ -95,7 +95,7 @@ def city(number=None):
 
 def country(number=None):
     '''
-        返回一个国家名字
+        返回一个随机国家名字
     '''
     if not number or number == 1:
         return fake.country()
@@ -107,7 +107,7 @@ def country(number=None):
 
 def street_address(number=None):
     '''
-        返回一个街道地址
+        返回一个随机街道地址
     '''
     if not number or number == 1:
         return fake.street_address()
@@ -119,7 +119,7 @@ def street_address(number=None):
 
 def company_name(number=None):
     '''
-        返回一个公司名字
+        返回一个随机公司名字
     '''
     if not number or number == 1:
         return fake.company()
@@ -131,7 +131,7 @@ def company_name(number=None):
 
 def date_time(number=None, **kwargs):
     '''
-        返回一个格式化日期
+        返回一个随机格式化日期
         date_time(pattern: str = '%Y-%m-%d', 
         end_datetime: Union[datetime.date, datetime.datetime, datetime.timedelta, str, int, None] = None
         ) → str 
@@ -146,7 +146,7 @@ def date_time(number=None, **kwargs):
 
 def date_of_birth(number=None, **kwargs):
     '''
-        返回一个生日日期
+        返回一个随机生日日期
         date_of_birth(tzinfo: Optional[datetime.tzinfo] = None,
         minimum_age: int = 0, maximum_age: int = 115
         ) → datetime.date
@@ -161,7 +161,7 @@ def date_of_birth(number=None, **kwargs):
 
 def future_datetime(number=None, **kwargs):
     '''
-        返回一个未来的时间
+        返回一个随机未来的时间
         future_datetime(end_date: Union[datetime.date, 
         datetime.datetime, datetime.timedelta, str, int] = '+30d', tzinfo: Optional[datetime.tzinfo] = None
         ) → datetime.datetime
@@ -177,7 +177,7 @@ def future_datetime(number=None, **kwargs):
 
 def past_datetime(number=None, **kwargs):
     '''
-        返回一个过去的时间
+        返回一个随机过去的时间
         past_datetime(start_date: Union[datetime.date,
         datetime.datetime, datetime.timedelta, str, int] = '-30d', tzinfo: Optional[datetime.tzinfo] = None
         ) → datetime.datetime
@@ -193,7 +193,7 @@ def past_datetime(number=None, **kwargs):
 
 def file_extension(number=None, **kwargs):
     '''
-        返回一个随机的文件后缀
+        返回一个随机随机的文件后缀
         If category is None, a random category will be used. 
         The list of valid categories include: 'audio', 'image', 'office', 'text', and 'video'
         file_extension(category: Optional[str] = None) → str
@@ -208,7 +208,7 @@ def file_extension(number=None, **kwargs):
 
 def email(number=None):
     '''
-        返回一个随机的email
+        返回一个随机随机的email
     '''
 
     if not number or number == 1:
@@ -220,7 +220,7 @@ def email(number=None):
 
 def http_method(number=None):
     '''
-        返回一个http请求方式
+        返回一个随机http请求方式
     '''
     if not number or number == 1:
         return fake.http_method()
@@ -232,7 +232,7 @@ def http_method(number=None):
 
 def ipv4(number=None):
     '''
-        返回一个ipv4
+        返回一个随机ipv4
         ipv4(network: bool = False, address_class: Optional[str] = None,
         private: Optional[str] = None) → str
     '''
@@ -245,7 +245,7 @@ def ipv4(number=None):
 
 def ipv6(number=None):
     '''
-        返回一个ipv6
+        返回一个随机ipv6
         ipv6(network: bool = False) → str
     '''
     if not number or number == 1:
@@ -255,7 +255,95 @@ def ipv6(number=None):
             return fake.ipv6()
     return (fake.ipv6() for _ in range(number))
 
+
+def phone_number(number=None):
+    '''
+        返回一个随机手机号
+       
+    '''
+    if not number or number == 1:
+        return fake.phone_number()
+    else:
+        if not isinstance(number, int):
+            return fake.phone_number()
+    return (fake.phone_number() for _ in range(number))
+
+
+def get_decimal(number=None,**kwargs):
+    '''
+        返回一个随机小数
+        get_decimal(left_digits=None, right_digits=None, positive=False, min_value=None, max_value=None)
+
+    '''
+
+    if not number or number == 1:
+        return fake.pydecimal()
+    else:
+        if not isinstance(number, int):
+            return fake.pydecimal()
+    return (fake.pydecimal(**kwargs) for _ in range(number))
+
+
+def get_float(number=None,**kwargs):
+    '''
+        返回一个随机浮点数
+        get_float(left_digits=None, right_digits=None, positive=False, min_value=None, max_value=None)
+
+    '''
+
+    if not number or number == 1:
+        return fake.get_float()
+    else:
+        if not isinstance(number, int):
+            return fake.get_float()
+    return (fake.get_float(**kwargs) for _ in range(number))
+
+
+
+def get_int(number=None,**kwargs):
+    '''
+        返回一个随机整数
+        get_int(min_value: int = 0, max_value: int = 9999, step: int = 1) → int
+
+    '''
+
+    if not number or number == 1:
+        return fake.get_int()
+    else:
+        if not isinstance(number, int):
+            return fake.get_int()
+    return (fake.get_int(**kwargs) for _ in range(number))
+
+
+def get_ssn(number=None):
+    '''
+        返回一个随机身份证号
+    '''
+
+    if not number or number == 1:
+        return fake.ssn()
+    else:
+        if not isinstance(number, int):
+            return fake.ssn()
+    return (fake.ssn() for _ in range(number))
+
+def get_user_agent(browser=None):
+    '''
+        返回一个随机的浏览器user_agent
+        get_user_agent(browser:Optins["chrome","ie","firefox","opera","safari"]=None) -> str
+    '''
+    if not browser:
+        return fake.user_agent()
+
+    if hasattr(fake,browser):
+        func = getattr(fake,browser)
+        return func()
+    else:
+        print('请输入正确的浏览器:["chrome","ie","firefox","opera","safari"]')
     
-print(fake.file_path(depth=4))
+
+
+
+
 
 
