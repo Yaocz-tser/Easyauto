@@ -56,7 +56,7 @@ def depend(case=None):
         @functools.wraps(test_func)
         def inner_func(self):
             if case == test_func.__name__:
-                raise ValueError(f'{case} cannot depend on itself')
+                raise ValueError(f'{case} cannot depend on itself'.format(case))
             failures = str([fail_[0] for fail_ in self._outcome.result.failures])
             errors = str([error_[0] for error_ in self._outcome.result.errors])
             skipped = str([skip_[0] for skip_ in self._outcome.result.skipped])
