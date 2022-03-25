@@ -1,12 +1,15 @@
 # coding=utf-8
 import re
 import ast
+import os
 from setuptools import setup, find_packages
-from os.path import dirname, join, abspath
 
+
+
+INIT_FILE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "__init__.py")
 _version_re = re.compile(r'__version__\s+=\s+(.*)')
 
-with open('Easyauto/__init__.py', 'rb') as f:
+with open(INIT_FILE, 'rb') as f:
     version = str(ast.literal_eval(_version_re.search(
         f.read().decode('utf-8')).group(1)))
 
@@ -16,7 +19,7 @@ setup(
     version=version,
     url='https://github.com/Yaocz-tser/Easyauto_1/',
     license='BSD',
-    author='itser',
+    author='itester',
     author_email='Yaocz-tser@163.com',
     description='WebUI/HTTP automation testing framework based on unittest.',
     packages=find_packages(),
