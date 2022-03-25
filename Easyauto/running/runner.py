@@ -11,9 +11,9 @@ from XTestRunner import XMLTestRunner
 from selenium.webdriver.remote.webdriver import WebDriver as SeleniumWebDriver
 from Easyauto.driver import Browser
 from Easyauto.logging import log
-from Easyauto.logging.exceptions import SeldomException
+from Easyauto.logging.exceptions import EasyautoException
 from Easyauto.running.DebugTestRunner import DebugTestRunner
-from Easyauto.running.config import Seldom, BrowserConfig
+from Easyauto.running.config import Easyauto, BrowserConfig
 from Easyauto.running.loader_extend import EasyautoTestLoader
 
 INIT_FILE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "__init__.py")
@@ -33,12 +33,12 @@ Easyauto_str = '''
 
 class TestMain(object):
     """
-    Reimplemented Seldom Runner, Support for Web and API
+    Reimplemented Easyauto Runner, Support for Web and API
     """
     TestSuits = []
 
     def __init__(self, path=None, browser=None, base_url=None, debug=False, timeout=10,
-                 report=None, title="Seldom Test Report", tester="Anonymous", description="Test case execution",
+                 report=None, title="Easyauto Test Report", tester="Anonymous", description="Test case execution",
                  rerun=0, save_last_run=False, language="en", whitelist=[], blacklist=[], auto=True):
         """
         runner test case
@@ -79,9 +79,9 @@ class TestMain(object):
         if isinstance(debug, bool) is False:
             raise TypeError("Debug {} is not Boolean type.".format(debug))
 
-        Seldom.timeout = timeout
-        Seldom.debug = debug
-        Seldom.base_url = base_url
+        Easyauto.timeout = timeout
+        Easyauto.debug = debug
+        Easyauto.base_url = base_url
 
         # ----- Global open browser -----
         self.open_browser()
@@ -161,16 +161,16 @@ class TestMain(object):
         """
         if self.browser is not None:
             BrowserConfig.NAME = self.browser
-            Seldom.driver = Browser(BrowserConfig.NAME)
+            Easyauto.driver = Browser(BrowserConfig.NAME)
 
     @staticmethod
     def close_browser():
         """
         How to open the browser, close the browser
         """
-        if isinstance(Seldom.driver, SeleniumWebDriver):
-            Seldom.driver.quit()
-            Seldom.driver = None
+        if isinstance(Easyauto.driver, SeleniumWebDriver):
+            Easyauto.driver.quit()
+            Easyauto.driver = None
 
 
 class TestMainExtend(TestMain):
@@ -181,7 +181,7 @@ class TestMainExtend(TestMain):
     """
 
     def __init__(self, path=None, browser=None, base_url=None, debug=False, timeout=10,
-                 report=None, title="Seldom Test Report", description="Test case execution",
+                 report=None, title="Easyauto Test Report", description="Test case execution",
                  rerun=0, save_last_run=False, whitelist=[], blacklist=[], auto=False):
 
         if path is None:
@@ -196,7 +196,7 @@ class TestMainExtend(TestMain):
     def collect_cases(json=False):
         """
         Return the collected case information.
-        SeldomTestLoader.collectCaseInfo = True
+        EasyautoTestLoader.collectCaseInfo = True
         """
         if json is True:
             return sys_json.dumps(EasyautoTestLoader.collectCaseList)
@@ -217,9 +217,9 @@ class TestMainExtend(TestMain):
             d_class = d.get("class").get("name", None)
             d_method = d.get("method").get("name", None)
             if (d_file is None) or (d_class is None) or (d_method is None):
-                raise SeldomException(
+                raise EasyautoException(
                     """Use case format error, please refer to: 
-                    https://github.com/SeldomQA/Easyauto/blob/master/docs/platform.md""")
+                    https://github.com/EasyautoQA/Easyauto/blob/master/docs/platform.md""")
             if file_name == d_file and class_name == d_class and method_name == d_method:
                 return True
 

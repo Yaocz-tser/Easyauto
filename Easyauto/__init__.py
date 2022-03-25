@@ -31,7 +31,7 @@ from .testdata.parameterization import *
 from .request import HttpRequest
 
 
-__author__ = "Yaocz-tser"
+__author__ = "itester"
 
 __version__ = "1.0.0"
 
