@@ -47,7 +47,7 @@ class WebElement(object):
 
     def __find_element(self, elem: tuple):
         '''
-        Find if the element exists.
+        查找元素是否存在
         '''
         for _ in range(Easyauto.timeout):
             elems = Easyauto.driver.find_elements(by=elem[0], value=elem[1])
@@ -63,7 +63,7 @@ class WebElement(object):
 
     def get_elements(self, index: int = None):
         '''
-        Judge element positioning way, and returns the element.
+        通过定位方式 返回一个素
         '''
 
         if self.by == "id_":
@@ -104,8 +104,7 @@ class WebElement(object):
     @staticmethod
     def show_element(elem):
         '''
-        Show the elements of the operation
-        :param elem:
+        显示当前正在定位的元素
         '''
         style_red = 'arguments[0].style.border="2px solid #FF0000"'
         style_blue = 'arguments[0].style.border="2px solid #00FF00"'
@@ -139,13 +138,11 @@ class WebElement(object):
 
 class WebDriver(object):
     '''
-        Easyauto framework for the main class, the original 
-        selenium provided by the method of the two packaging,
-        making it easier to use.
+        Easyauto自动化框架主要类, 让原生的selenium方法使用起来更轻松
     '''
     class keys:
         '''
-            Usage:
+            使用方式:
                 self.Keys(id_="kw").enter()
         '''
         def __init__(self, index: int = 0, **kwargs):
@@ -206,7 +203,7 @@ class WebDriver(object):
         '''
         visit url.
 
-        Usage:
+        使用方式:
             self.visit("https://www.baidu.com")
         '''
         if isinstance(Easyauto.driver, SeleniumWebDriver) is False:
@@ -218,7 +215,7 @@ class WebDriver(object):
         '''
         open url.
 
-        Usage:
+        使用方式:
             self.open("https://www.baidu.com")
         '''
         self.visit(url)
@@ -235,7 +232,7 @@ class WebDriver(object):
     def type(self, text: str, clear: bool = False, enter: bool = False, index: int = 0, **kwargs):
 
         '''
-            Usage:
+            使用方式:
             self.type(css="#el", text="selenium")
         '''
         if clear is True:
@@ -263,7 +260,7 @@ class WebDriver(object):
         """
         Clear the contents of the input box.
 
-        Usage:
+        使用方式:
             self.clear(css="#el")
         """
         web_elem = WebElement(**kwargs)
@@ -278,7 +275,7 @@ class WebDriver(object):
         It can click any text / image can be clicked
         Connection, check box, radio buttons, and even drop-down box etc..
 
-        Usage:
+        使用方式:
             self.click(css="#el")
         """
         web_elem = WebElement(**kwargs)
@@ -292,7 +289,7 @@ class WebDriver(object):
         """
         Moving the mouse to the middle of an element. and click element.
 
-        Usage:
+        使用方式:
             self.slow_click(css="#el")
         """
         web_elem = WebElement(**kwargs)
@@ -306,7 +303,7 @@ class WebDriver(object):
         """
         Right click element.
 
-        Usage:
+        使用方式:
             self.right_click(css="#el")
         """
         web_elem = WebElement(**kwargs)
@@ -320,7 +317,7 @@ class WebDriver(object):
         """
         Mouse over the element.
 
-        Usage:
+        使用方式:
             self.move_to_element(css="#el")
         """
         web_elem = WebElement(**kwargs)
@@ -334,8 +331,8 @@ class WebDriver(object):
         """
         Mouse over the element.
 
-        Usage:
-            self.move_to_element(css="#el")
+        使用方式:
+            self.click_and_hold(css="#el")
         """
         web_elem = WebElement(**kwargs)
         elem = web_elem.get_elements(index)
@@ -366,7 +363,7 @@ class WebDriver(object):
         """
         Double click element.
 
-        Usage:
+        使用方式:
             self.double_click(css="#el")
         """
         web_elem = WebElement(**kwargs)
@@ -380,7 +377,7 @@ class WebDriver(object):
         """
         Click the element by the link text
 
-        Usage:
+        使用方式:
             self.click_text("新闻")
         """
         web_elem = WebElement(link_text=text)
@@ -394,7 +391,7 @@ class WebDriver(object):
         """
         Closes the current window.
 
-        Usage:
+        使用方式:
             self.close()
         """
         Easyauto.driver.close()
@@ -404,7 +401,7 @@ class WebDriver(object):
         """
         Quit the driver and close all the windows.
 
-        Usage:
+        使用方式:
             self.quit()
         """
         Easyauto.driver.quit()
@@ -414,7 +411,7 @@ class WebDriver(object):
         """
         Submit the specified form.
 
-        Usage:
+        使用方式:
             driver.submit(css="#el")
         """
         web_elem = WebElement(**kwargs)
@@ -428,7 +425,7 @@ class WebDriver(object):
         """
         Refresh the current page.
 
-        Usage:
+        使用方式:
             self.refresh()
         """
         log.info("🔄️ refresh page.")
@@ -439,7 +436,7 @@ class WebDriver(object):
         """
         Execute JavaScript scripts.
 
-        Usage:
+        使用方式:
             self.execute_script("window.scrollTo(200,1000);")
         """
         return Easyauto.driver.execute_script(script, *args)
@@ -448,7 +445,7 @@ class WebDriver(object):
         """
         Setting width and height of window scroll bar.
 
-        Usage:
+        使用方式:
             self.window_scroll(width=300, height=500)
         """
         js = "window.scrollTo({w},{h});".format(w=str(width), h=str(height))
@@ -458,7 +455,7 @@ class WebDriver(object):
         """
         Setting width and height of element scroll bar.
 
-        Usage:
+        使用方式:
             self.element_scroll(css=".class", width=300, height=500)
         """
         scroll_life = 'document.querySelector("{css}").scrollLeft = {w};'.format(css=css, w=str(width))
@@ -471,7 +468,7 @@ class WebDriver(object):
         """
         Gets the value of an element attribute.
 
-        Usage:
+        使用方式:
             self.get_attribute(css="#el", attribute="type")
         """
         if attribute is None:
@@ -487,7 +484,7 @@ class WebDriver(object):
         """
         Get element text information.
 
-        Usage:
+        使用方式:
             self.get_text(css="#el")
         """
         web_elem = WebElement(**kwargs)
@@ -501,7 +498,7 @@ class WebDriver(object):
         """
         Gets the element to display,The return result is true or false.
 
-        Usage:
+        使用方式:
             self.get_display(css="#el")
         """
         web_elem = WebElement(**kwargs)
@@ -516,7 +513,7 @@ class WebDriver(object):
         """
         Get window title.
 
-        Usage:
+        使用方式:
             self.get_title()
         """
         log.info("✅ get title: {}.".format(Easyauto.driver.title))
@@ -527,7 +524,7 @@ class WebDriver(object):
         """
         Get the URL address of the current page.
 
-        Usage:
+        使用方式:
             self.get_url()
         """
         log.info("✅ get current url: {}.".format(Easyauto.driver.current_url))
@@ -538,7 +535,7 @@ class WebDriver(object):
         """
         Gets the text of the Alert.
 
-        Usage:
+        使用方式:
             self.get_alert_text()
         """
         log.info("✅ alert text: {}.".format(Easyauto.driver.switch_to.alert.text))
@@ -549,7 +546,7 @@ class WebDriver(object):
         """
         Implicitly wait.All elements on the page.
 
-        Usage:
+        使用方式:
             self.wait(10)
         """
         log.info("⌛️ implicitly wait: {}s.".format(str(secs)))
@@ -560,7 +557,7 @@ class WebDriver(object):
         """
         Accept warning box.
 
-        Usage:
+        使用方式:
             self.accept_alert()
         """
         log.info("✅ accept alert.")
@@ -571,7 +568,7 @@ class WebDriver(object):
         """
         Dismisses the alert available.
 
-        Usage:
+        使用方式:
             self.dismiss_alert()
         """
         log.info("✅ dismiss alert.")
@@ -582,7 +579,7 @@ class WebDriver(object):
         """
         Switch to the specified frame.
 
-        Usage:
+        使用方式:
             self.switch_to_frame(css="#el")
         """
         web_elem = WebElement(**kwargs)
@@ -597,7 +594,7 @@ class WebDriver(object):
         Returns the current form machine form at the next higher level.
         Corresponding relationship with switch_to_frame () method.
 
-        Usage:
+        使用方式:
             self.switch_to_frame_out()
         """
         log.info("✅ switch to frame out.")
@@ -611,7 +608,7 @@ class WebDriver(object):
         :Args:
          - window: window index. 1 represents a newly opened window (0 is the first one)
 
-        :Usage:
+        :使用方式:
             self.switch_to_window(1)
         """
         log.info("✅ switch to the {} window.".format(str(window)))
@@ -622,7 +619,7 @@ class WebDriver(object):
         """
         Saves a screenshots of the current window to a PNG image file.
 
-        Usage:
+        使用方式:
             self.screenshots()
             self.screenshots('/Screenshots/foo.png')
         """
@@ -642,7 +639,7 @@ class WebDriver(object):
         """
         Saves a element screenshot of the element to a PNG image file.
 
-        Usage:
+        使用方式:
             self.element_screenshot(css="#id")
             self.element_screenshot(css="#id", file_path='/Screenshots/foo.png')
         """
@@ -671,7 +668,7 @@ class WebDriver(object):
          - css - element SELECT element to wrap
          - value - The value to match against
 
-        Usage:
+        使用方式:
             <select name="NR" id="nr">
                 <option value="10" selected="">每页显示10条</option>
                 <option value="20">每页显示20条</option>
@@ -700,7 +697,7 @@ class WebDriver(object):
     def get_cookies():
         """
         Returns a set of dictionaries, corresponding to cookies visible in the current session.
-        Usage:
+        使用方式:
             self.get_cookies()
         """
         return Easyauto.driver.get_cookies()
@@ -709,7 +706,7 @@ class WebDriver(object):
     def get_cookie(name: str):
         """
         Returns information of cookie with ``name`` as an object.
-        Usage:
+        使用方式:
             self.get_cookie("name")
         """
         return Easyauto.driver.get_cookie(name)
@@ -718,7 +715,7 @@ class WebDriver(object):
     def add_cookie(cookie_dict: dict):
         """
         Adds a cookie to your current session.
-        Usage:
+        使用方式:
             self.add_cookie({'name' : 'foo', 'value' : 'bar'})
         """
         if isinstance(cookie_dict, dict):
@@ -730,7 +727,7 @@ class WebDriver(object):
     def add_cookies(cookie_list: list):
         """
         Adds a cookie to your current session.
-        Usage:
+        使用方式:
             cookie_list = [
                 {'name' : 'foo', 'value' : 'bar'},
                 {'name' : 'foo', 'value' : 'bar'}
@@ -750,7 +747,7 @@ class WebDriver(object):
     def delete_cookie(name: str):
         """
         Deletes a single cookie with the given name.
-        Usage:
+        使用方式:
             self.delete_cookie('my_cookie')
         """
         Easyauto.driver.delete_cookie(name)
@@ -759,7 +756,7 @@ class WebDriver(object):
     def delete_all_cookies():
         """
         Delete all cookies in the scope of the session.
-        Usage:
+        使用方式:
             self.delete_all_cookies()
         """
         Easyauto.driver.delete_all_cookies()
@@ -767,7 +764,7 @@ class WebDriver(object):
     @staticmethod
     def sleep(sec: int):
         """
-        Usage:
+        使用方式:
             self.sleep(seconds)
         """
         log.info("💤️ sleep: {}s.".format(str(sec)))
@@ -778,7 +775,7 @@ class WebDriver(object):
         """
         Check that the element exists
 
-        Usage:
+        使用方式:
         self.check_element(css="#el")
         """
         if css is None:
@@ -802,7 +799,7 @@ class WebDriver(object):
         '''
         Get a set of elements
 
-        Usage:
+        使用方式:
         ret = self.get_elements(css="#el")
         print(len(ret))
         '''
@@ -821,7 +818,7 @@ class WebDriver(object):
         '''
         Get a set of elements
 
-        Usage:
+        使用方式:
         elem = self.get_element(index=1, css="#el")
         elem.click()
         '''

@@ -109,7 +109,7 @@ def main():
 
 def create_scaffold(project_name):
     """
-    create scaffold with specified project name.
+    创建项目.
     """
     if os.path.isdir(project_name):
         log.info(u"Folder {} exists, please specify a new folder name.".format(project_name))

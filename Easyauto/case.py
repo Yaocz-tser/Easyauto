@@ -10,24 +10,24 @@ from selenium.webdriver.common.by import By
 from Easyauto.webdriver import WebDriver
 from Easyauto.running.config import Easyauto
 from Easyauto.logging.exceptions import NotFindElementError
-from Easyauto.request import ResponseResult
+from Easyauto.request import HttpRequest, ResponseResult
 from Easyauto.utils import diff_json, AssertInfo
 
 
 
 
 
-class TestCase(unittest.TestCase, WebDriver):
+class TestCase(unittest.TestCase, WebDriver,HttpRequest):
 
     def start_class(self):
         '''
-        Hook method for setting up class fixture before running tests in the class.
+        测试类开始之前执行
         '''
         pass
 
     def end_class(self):
         '''
-        Hook method for deconstructing the class fixture after running all tests in the class.
+        测试类结束之后执行
         '''
         pass
 
