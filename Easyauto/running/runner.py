@@ -16,20 +16,25 @@ from Easyauto.running.DebugTestRunner import DebugTestRunner
 from Easyauto.running.config import Easyauto, BrowserConfig
 from Easyauto.running.loader_extend import EasyautoTestLoader
 
-INIT_FILE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "__init__.py")
+INIT_FILE = os.path.join(os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__))), "__init__.py")
 _version_re = re.compile(r'__version__\s+=\s+(.*)')
 with open(INIT_FILE, 'rb') as f:
     version = str(ast.literal_eval(_version_re.search(
         f.read().decode('utf-8')).group(1)))
 
 Easyauto_str = '''
-   ______                             __      
-   / ____/___ ________  ______ ___  __/ /_____ 
-  / __/ / __ `/ ___/ / / / __ `/ / / / __/ __ \
- / /___/ /_/ (__  ) /_/ / /_/ / /_/ / /_/ /_/ /
-/_____/\__,_/____/\__, /\__,_/\__,_/\__/\____/ v{v} 
-                 /____/                      
+  _____                            _        
+ | ____|__ _ ___ _   _  __ _ _   _| |_ ___  
+ |  _| / _` / __| | | |/ _` | | | | __/ _ \ 
+ | |___ (_| \__ \ |_| | (_| | |_| | |_ (_) |
+ |_____\__,_|___/\__, |\__,_|\__,_|\__\___/ 
+                 |___/                      v{v} 
+         
 '''.format(v=version)
+
+
+
 
 class TestMain(object):
     """
@@ -89,7 +94,6 @@ class TestMain(object):
         if self.path is None:
             stack_t = inspect.stack()
             ins = inspect.getframeinfo(stack_t[1][0])
-            print(ins.filename)
             file_dir = os.path.dirname(os.path.abspath(ins.filename))
             file_path = ins.filename
             if "\\" in file_path:
@@ -98,16 +102,18 @@ class TestMain(object):
                 this_file = file_path.split("/")[-1]
             else:
                 this_file = file_path
-            self.TestSuits = EasyautoTestLoader.discover(file_dir, this_file)
+            self.TestSuits = EasyautoTestLoader.discover(file_dir, this_file)     
         else:
             if len(self.path) > 3:
                 if self.path[-3:] == ".py":
                     if "/" in self.path:
                         path_list = self.path.split("/")
                         path_dir = self.path.replace(path_list[-1], "")
-                        self.TestSuits = EasyautoTestLoader.discover(path_dir, pattern=path_list[-1])
+                        self.TestSuits = EasyautoTestLoader.discover(
+                            path_dir, pattern=path_list[-1])
                     else:
-                        self.TestSuits = EasyautoTestLoader.discover(os.getcwd(), pattern=self.path)
+                        self.TestSuits = EasyautoTestLoader.discover(
+                            os.getcwd(), pattern=self.path)
                 else:
                     self.TestSuits = EasyautoTestLoader.discover(self.path)
             else:
@@ -133,7 +139,8 @@ class TestMain(object):
             if (self.report is None) and (BrowserConfig.REPORT_PATH is not None):
                 report_path = BrowserConfig.REPORT_PATH
             else:
-                report_path = BrowserConfig.REPORT_PATH = os.path.join(os.getcwd(), "reports", self.report)
+                report_path = BrowserConfig.REPORT_PATH = os.path.join(
+                    os.getcwd(), "reports", self.report)
 
             with(open(report_path, 'wb')) as fp:
                 if report_path.split(".")[-1] == "xml":
@@ -142,10 +149,12 @@ class TestMain(object):
                 else:
                     runner = HTMLTestRunner(stream=fp, title=self.title, tester=self.tester, description=self.description,
                                             language=self.language, blacklist=self.blacklist, whitelist=self.whitelist)
-                    runner.run(suits, rerun=self.rerun, save_last_run=self.save_last_run)
+                    runner.run(suits, rerun=self.rerun,
+                               save_last_run=self.save_last_run)
 
             log.printf("generated html file: file:///{}".format(report_path))
-            log.printf("generated log file: file:///{}".format(BrowserConfig.LOG_PATH))
+            log.printf(
+                "generated log file: file:///{}".format(BrowserConfig.LOG_PATH))
             webbrowser.open_new("file:///{}".format(report_path))
         else:
             runner = DebugTestRunner(
@@ -153,7 +162,8 @@ class TestMain(object):
                 whitelist=self.whitelist,
                 verbosity=2)
             runner.run(suits)
-            log.printf("A run the test in debug mode without generating HTML report!")
+            log.printf(
+                "A run the test in debug mode without generating HTML report!")
 
     def open_browser(self):
         """
@@ -245,7 +255,8 @@ class TestMainExtend(TestMain):
                     file_name = case.__module__
                     class_name = case.__class__.__name__
                     method_name = str(case).split(" ")[0]
-                    ret = self._diff_case(file_name, class_name, method_name, data)
+                    ret = self._diff_case(
+                        file_name, class_name, method_name, data)
                     if ret is True:
                         suit.addTest(case)
 

@@ -21,7 +21,7 @@ from .case import TestCase
 from .running.config import Easyauto
 from .running.loader_extend import EasyautoTestLoader
 from .running.runner import main, TestMainExtend
-# from .utils.send_extend import SMTP, DingTalk
+from .utils.send_extend import SMTP, DingTalk
 
 from .skip import *
 from .driver import *
