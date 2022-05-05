@@ -14,7 +14,7 @@ with open('Easyauto/__init__.py', 'rb') as f:
 setup(
     name='Easyauto',
     version=version,
-    url='https://github.com/Yaocz-tser/Easyauto_1/',
+    url='https://github.com/Yaocz-tser/Easyauto/',
     license='BSD',
     author='itester',
     author_email='Yaocz-tser@163.com',
